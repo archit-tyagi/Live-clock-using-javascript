@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+	<title>Digital Clock</title>
+
+	<style>
+        *{
+            margin: 0;
+            padding: 0;
+            background-color: black;
+        }
+		#clock {
+			font-size: 70px;
+			border: 2px solid black;
+			border-radius: 20px;
+            background-color: #ccffcc;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            text-align: center; 
+            padding: 20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="clock"></div>
+
+	<script>
+		setInterval(()=>{
+			let time = new Date();
+			let hour = time.getHours();
+			let min = time.getMinutes();
+			let sec = time.getSeconds();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+			meridian = "AM";
+
+			if (hour > 12) {
+				hour -= 12;
+				meridian = "PM";
+			}
+			if (hour == 0) {
+				hr = 12;
+				meridian = "AM";
+			}
+
+			hour = hour < 10 ? "0" + hour : hour;
+			min = min < 10 ? "0" + min : min;
+			sec = sec < 10 ? "0" + sec : sec;
+
+			let currentTime = hour + ":"+ min + ":" + sec +' '+ meridian;
+            let date=time.toLocaleDateString(undefined,options);
+			document.getElementById("clock").innerHTML = currentTime +"<br>"+ date;
+		} ,1000);
+
+		showTime();
+	</script>
+</body>
+
+</html>
